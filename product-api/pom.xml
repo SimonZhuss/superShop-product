@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.zss.superShop</groupId>
+		<artifactId>product-server</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<packaging>jar</packaging>
+	<artifactId>product-api</artifactId>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<product-server.version>1.0.0-SNAPSHOT</product-server.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.zss.superShop</groupId>
+			<artifactId>product-service</artifactId>
+			<version>${product-server.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.zss.superShop</groupId>
+			<artifactId>product-common</artifactId>
+			<version>${product-server.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>4.3.14.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-rest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>0.2.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-ehcache</artifactId>
+            <version>5.2.16.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>**/*.yml</exclude>
+				</excludes>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	 <finalName>product-server</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.zss.ProductServerApplication</mainClass>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	
+</project>
