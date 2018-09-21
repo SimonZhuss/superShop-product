@@ -6,9 +6,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
+import org.springframework.context.annotation.Bean;
 import org.springframework.util.StringUtils;
+import org.springframework.web.client.RestTemplate;
 
 import com.zss.product.constants.ProductConstants;
 
@@ -22,6 +27,7 @@ import com.zss.product.constants.ProductConstants;
 @EnableAutoConfiguration
 @EnableFeignClients
 @EnableEurekaClient
+@EnableHystrix
 //@ComponentScan(basePackages={"com.zss.product.repository"}) 因为repository里有加@Repository所以这个注解可以不用，反之亦然
 public class ProductServerApplication {
 
@@ -40,5 +46,10 @@ public class ProductServerApplication {
 		System.setProperty("log.path", configPath);
         SpringApplication.run(ProductServerApplication.class, args);
     }
-
+    
+    @Bean
+    @LoadBalanced
+    RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 }

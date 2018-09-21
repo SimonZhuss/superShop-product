@@ -27,5 +27,10 @@
             <artifactId>product-persistence</artifactId>
             <version>${product-server.version}</version>
         </dependency>
+        <dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-hystrix</artifactId>
+		    <version>1.4.5.RELEASE</version>
+		</dependency>
     </dependencies>
 </project>

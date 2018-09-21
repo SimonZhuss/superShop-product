@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,10 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.zss.product.entity.AjaxData;
 import com.zss.product.entity.BaseResEntity;
 import com.zss.product.entity.ResponseEntity;
 import com.zss.product.req.ProductReq;
 import com.zss.product.service.ProductService;
+import com.zss.product.service.rpc.entity.UserInfo;
+import com.zss.product.service.rpc.entity.UserReq;
 
 /**
  * 产品控制器
@@ -44,5 +49,14 @@ public class ProductController {
             log.error("发生异常:",e);
             return BaseResEntity.failure();
         }
+    }
+	
+	@ApiOperation(value = "根据用户名查询用户", httpMethod = "POST", produces = "application/json")
+	@ApiResponse(code = 200, message = "success", response = ResponseEntity.class)
+    @RequestMapping(value = "/queryUserByName", method = RequestMethod.POST)
+	@ResponseBody
+    public AjaxData<List<UserInfo>> queryUserByName(@RequestBody UserReq userReq){
+		AjaxData<List<UserInfo>> result =productService.queryUserByName(userReq);
+    	return result;
     }
 }

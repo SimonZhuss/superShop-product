@@ -3,7 +3,6 @@ package com.zss.product.service.rpc;
 import java.util.List;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.zss.product.entity.AjaxData;
 import com.zss.product.service.rpc.entity.UserInfo;
 import com.zss.product.service.rpc.entity.UserReq;
+import com.zss.product.service.rpc.hystric.UserSericeHystric;
 
 
 /**
@@ -18,10 +18,9 @@ import com.zss.product.service.rpc.entity.UserReq;
  * @auther zhushanshan
  * @since 2017年11月15日下午2:54:10
  */
-@FeignClient(value="user-server")
-@RequestMapping(value="user", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}, consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+@FeignClient(value="user-server",fallback = UserSericeHystric.class)
 public interface UserServiceClient {
 	
-    @RequestMapping(value = "/queryByCondition",method = RequestMethod.POST)
+    @RequestMapping(value = "/user/queryByCondition",method = RequestMethod.POST)
     AjaxData<List<UserInfo>> queryByCondition(@RequestBody UserReq req);
 }
