@@ -5,7 +5,10 @@
 
 3、利用@FeignClient调用SpringCloud接口
 
-4、
+4、Rest+Ribbon作为消费者
+
+5、上面两种服务消费者进行断路器的实现
+
 
 
 
